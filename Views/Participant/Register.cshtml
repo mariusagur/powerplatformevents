@@ -1,0 +1,76 @@
+﻿@model powerplatformevents.Models.Participants
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register for Power Platform Saturday Oslo 2019</h1>
+
+<h4>Participant information</h4>
+<span>Personal information is deleted after the event, your information is only used to register you at the venue.</span><br />
+<span>If you don't want to give out your personal information then you cannot pre-register, but you can come at the day of the event and join if there are more seats left.</span>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Register">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailAddress" class="control-label"></label>
+                    <input asp-for="EmailAddress" class="form-control" />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="EventId" value="7" />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+    @*<body>
+            <form method="post">
+                <fieldset>
+                    <legend>Add Customer</legend>
+                    <div>
+                        <label for="ParticipantName">Name:</label>
+                        <input type="text" name="ParticipantName" value="" />
+                        @Html.ValidationMessage("Name")
+                    </div>
+                    <div>
+                        <label for="EmailAddress">Email address:</label>
+                        <input type="text" name="EmailAddress" value="" />
+                        @Html.ValidationMessage("EmailAddress")
+                    </div>
+                    <div>
+                        <label for="PhoneNumber">Phone Number (country code optional):</label>
+                        <input type="text" name="PhoneNumber" value="" />
+                        @Html.ValidationMessage("PhoneNumber")
+                    </div>
+                    <div>
+                        <label>&nbsp;</label>
+                        <input type="submit" value="Submit" class="submit" />
+                    </div>
+                </fieldset>
+            </form>
+        </body>*@
+
+

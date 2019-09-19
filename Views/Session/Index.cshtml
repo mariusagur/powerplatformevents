@@ -1,0 +1,43 @@
+﻿@model powerplatformevents.Models.Sessions
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@{
+    var level = "N/A";
+    switch (Model.Level)
+    {
+        case "100":
+            level = "Beginner";
+            break;
+        case "200":
+            level = "Advanced";
+            break;
+        case "300":
+            level = "Expert";
+            break;
+        case "400":
+            level = "Expert, deep-dive";
+            break;
+        default:
+            break;
+    }
+}
+
+<div class="row">
+    <div class="col-xs-6">
+        <h2>@Model.Name</h2>
+        @if (Model.Speaker != null)
+        {
+            <h3>
+                <a href="@(Model.Speaker.TwitterAddress ?? Model.Speaker.LinkedInProfile)" target="_blank">
+                    @string.Concat(Model.Speaker.FirstName, " ", Model.Speaker.LastName)
+                </a>
+            </h3>
+        }
+        <h4>Level: @Model.Level (@level)</h4>
+        <span class="text-size-bigger">@Model.Description</span>
+
+    </div>
+</div>

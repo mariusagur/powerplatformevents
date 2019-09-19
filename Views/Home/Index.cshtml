@@ -1,0 +1,74 @@
+﻿@model Dictionary<int, Dictionary<int, powerplatformevents.Models.Sessions>>
+
+@{ ViewData["Title"] = Model[0][0].Event.Name; }
+
+@{var message = TempData["Registered"] as powerplatformevents.Models.MessageViewModel;}
+
+@if (message != null)
+{
+    <div class="alert @message.CssClassName">
+        <strong>@message.Title</strong>
+        @message.Message
+    </div>
+}
+<div class="desktop-viewport">
+<div class="row">
+    <div class="col-xs-8">
+        <h1>Power Platform Saturday Oslo</h1>
+        <h3>August 24th 2019</h3>
+        <h3>@Html.ActionLink("Register today!", "Register", "Participant")</h3>
+    </div>
+    <div class="col-xs-4"><img style="float: right; padding-top: 20px;" src="~/images/SolgariBlue.png" /></div>
+    <div class="col-xs-4"><img style="float: right; padding-top: 5px; padding-bottom: 5px;" src="~/images/crmkonsulterna-small.png" /></div>
+</div>
+
+<table class="table table-bordered text-center table-hover">
+    <thead class="text-center">
+        <tr class="info">
+            <td><h3>Timeslot</h3></td>
+            <td><h3>Red track</h3></td>
+            <td><h3>Blue track</h3></td>
+            <td><h3>Yellow track</h3></td>
+            <td><h3>Workshops</h3></td>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @for (int i = 0; i < 8; i++)
+        {
+            <tr>
+                @for (int j = 0; j < 5; j++)
+                {
+                    var session = Model.GetValueOrDefault(i)?.GetValueOrDefault(j);
+                    @if (session != null)
+                    {
+                        var id = "track" + i + "slot" + j;
+                        <td id="@id" colspan="@session.ColumnSpan" rowspan="@session.RowSpan" class="@(session.ColumnSpan > 1 ? "active" : "")">
+                            @if (session.Description == null)
+                            {
+                                <h3><strong>@session.Name</strong></h3>
+                            }
+                            else {
+                                <h4><strong>
+                                   @Html.ActionLink(
+                                   string.Concat(session.Speaker.FirstName, " ", session.Speaker.LastName),
+                                   "Index",
+                                   "Session",
+                                   new { id = session.Id }
+                                   )
+                                </strong></h4>
+                                @session.Name
+                            }
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<br /><br />
+<h2>Address:</h2>
+Microsoft Norge AS<br />
+Dronning Eufemias Gate 71<br />
+0194 Oslo<br />
+Norway<br />
